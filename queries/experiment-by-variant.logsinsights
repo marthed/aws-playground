@@ -1,0 +1,4 @@
+# Sessions per step, split by variant. Compare shop.purchase_completed with shop.flag_exposure
+filter event_type like /^shop\./ and ispresent(event_details.variant)
+| stats count_distinct(user_details.sessionId) as sessions by event_details.variant, event_type
+| sort event_details.variant, sessions desc

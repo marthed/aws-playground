@@ -1,0 +1,4 @@
+# JavaScript errors grouped by message
+filter event_type = 'com.amazon.rum.js_error_event'
+| stats count(*) as errors, count_distinct(user_details.sessionId) as sessions by event_details.type, event_details.message
+| sort errors desc

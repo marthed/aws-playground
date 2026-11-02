@@ -1,0 +1,21 @@
+{
+  "name": "aws-behavior-tracking",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "app",
+    "infra"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "npm run dev -w app",
+    "dev:mock": "(trap 'kill 0' INT TERM; node mock/server.mjs & npm run dev:mock -w app)",
+    "typecheck": "npm run typecheck -w app && npm run typecheck -w infra",
+    "test": "npm test -w infra && node --test mock/*.test.mjs",
+    "synth": "npm run synth -w infra",
+    "deploy": "npm run deploy -w infra && node scripts/write-env.mjs",
+    "report": "curl -s localhost:4319/report | jq"
+  }
+}

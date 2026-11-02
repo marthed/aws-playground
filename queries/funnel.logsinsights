@@ -1,0 +1,4 @@
+# Sessions reaching each step of the shop funnel
+filter event_type like /^shop\./
+| stats count_distinct(user_details.sessionId) as sessions, count(*) as events by event_type
+| sort sessions desc

@@ -1,0 +1,15 @@
+{
+  "version": "1",
+  "flags": {
+    "express_checkout": {
+      "name": "Express checkout",
+      "description": "One-click checkout button on the cart page",
+      "attributes": {
+        "rolloutPercent": { "constraints": { "type": "number", "required": true, "minimum": 0, "maximum": 100 } }
+      }
+    }
+  },
+  "values": {
+    "express_checkout": { "enabled": true, "rolloutPercent": 50 }
+  }
+}

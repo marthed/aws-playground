@@ -1,0 +1,4 @@
+# Most viewed pages
+filter event_type = 'com.amazon.rum.page_view_event'
+| stats count(*) as views, count_distinct(user_details.sessionId) as sessions by metadata.pageId
+| sort views desc

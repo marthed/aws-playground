@@ -1,0 +1,7 @@
+node_modules/
+dist/
+cdk.out/
+cdk-outputs.json
+.env.local
+mock/.data/
+.DS_Store

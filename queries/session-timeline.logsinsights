@@ -1,0 +1,4 @@
+# One session in order. Replace the placeholder with a user_details.sessionId
+fields @timestamp, event_type, metadata.pageId, event_details.variant
+| filter user_details.sessionId = 'REPLACE_WITH_SESSION_ID'
+| sort @timestamp asc
