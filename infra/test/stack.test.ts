@@ -27,6 +27,11 @@ test('guest role can only send events to the app monitor', () => {
 test('flags are deployed as an AppConfig feature flag profile', () => {
     template.hasResourceProperties('AWS::AppConfig::ConfigurationProfile', { Type: 'AWS.AppConfig.FeatureFlags' });
     template.resourceCountIs('AWS::AppConfig::Deployment', 1);
+    template.hasResourceProperties('AWS::AppConfig::DeploymentStrategy', {
+        DeploymentDurationInMinutes: 0,
+        FinalBakeTimeInMinutes: 0,
+        GrowthFactor: 100
+    });
 });
 
 test('flags function can read the configuration', () => {

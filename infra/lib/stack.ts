@@ -90,11 +90,14 @@ export class BehaviorTrackingStack extends Stack {
             type: appconfig.ConfigurationType.FEATURE_FLAGS,
             content: appconfig.ConfigurationContent.fromFile(join(root, 'flags.json'), 'application/json'),
             deployTo: [environment],
-            deploymentStrategy: appconfig.DeploymentStrategy.fromDeploymentStrategyId(
-                this,
-                'AllAtOnce',
-                appconfig.DeploymentStrategyId.ALL_AT_ONCE
-            )
+            // The predefined all-at-once strategy bakes for 10 minutes, which makes every flag change that slow to deploy
+            deploymentStrategy: new appconfig.DeploymentStrategy(this, 'Immediate', {
+                rolloutStrategy: appconfig.RolloutStrategy.linear({
+                    growthFactor: 100,
+                    deploymentDuration: Duration.minutes(0),
+                    finalBakeTime: Duration.minutes(0)
+                })
+            })
         });
 
         // The browser reads flags through this function so it never calls AppConfig directly

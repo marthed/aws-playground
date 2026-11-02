@@ -19,6 +19,7 @@ Flags go through a Lambda so the browser needs no AppConfig access and the funct
 ## Try it locally, no AWS account needed
 
 ```sh
+nvm use               # dependencies include native binaries, so install and run with the same Node
 npm install
 npm run dev:mock      # app on http://localhost:5173, mock RUM + flags on :4319
 ```
@@ -36,8 +37,9 @@ The mock uses the real `aws-rum-web` client and saves events to `mock/.data/rum-
 You need AWS credentials in your shell. The AWS CLI is optional because the CDK runs from `node_modules`.
 
 ```sh
+export AWS_REGION=eu-north-1
 npm run cdk -w infra -- bootstrap    # once per account and region
-AWS_REGION=eu-north-1 npm run deploy # also writes app/.env.local
+npm run deploy                       # also writes app/.env.local
 npm run dev                          # app on http://localhost:5173, sending to AWS
 ```
 
